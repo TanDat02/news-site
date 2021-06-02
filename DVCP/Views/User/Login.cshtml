@@ -1,0 +1,76 @@
+﻿@model DVCP.Models.UserLogin
+@using CaptchaMvc.HtmlHelpers;
+
+@{ ViewBag.Title = "Login"; }
+
+<style type="text/css">
+    input[name='CaptchaInputText'] {
+        width: 284px !important;
+        height: 40px;
+        border: 1px solid #808080;
+    }
+
+    }
+</style>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("img").addClass("img-circle")
+        })
+    </script>
+
+}
+
+<div id="login">
+    <div class="w3-container">
+
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:315px">
+
+            <div class="w3-container w3-section">
+                <h3 class="text-center text-info">Đăng Nhập</h3>
+                <h6 class="badge badge-danger">@ViewBag.Message</h6>
+                @using (Html.BeginForm("Login", "User", new { ReturnUrl = @ViewBag.ReturnUrl }, FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @*@Html.ValidationSummary()
+                        <p>ReturnUrl = @ViewBag.ReturnUrl</p>*@
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EmailID)
+                        @Html.TextBoxFor(m => m.EmailID, "", new { @class = "w3-input w3-border w3-margin-bottom", @placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.EmailID, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "w3-input w3-border w3-margin-bottom", @placeholder = "Mật khẩu" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Captcha("Refresh", "Mã xác minh", 5, "Captcha là bắt buộc", true)
+                        <div class="text-center text-danger">@ViewBag.error</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remember-me" class="text-info">
+                            <span>@Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "text-info" })</span> <span>
+                                @Html.EditorFor(model => model.RememberMe)
+                            </span>
+                        </label><br>
+                        <input type="submit" name="submit" class="btn btn-info btn-md col-md-12" value="Đăng nhập">
+                    </div>
+                    <div id="register-link" class="text-right">
+                        <a class="text-info">@Html.ActionLink("Đăng ký", "Registration", "User")</a>|
+                        <a class="text-info">@Html.ActionLink("Quên mật khẩu?", "ForgotPassword", "User")</a>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

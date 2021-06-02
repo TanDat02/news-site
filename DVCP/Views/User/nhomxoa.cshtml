@@ -1,0 +1,56 @@
+﻿@model DVCP.Models.systemgroup
+
+@{
+    ViewBag.Title = "nhomxoa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    dd {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+</style>
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> XÓA THÔNG TIN</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+<h4><font color="red">Bạn đồng ý xóa không?</font></h4>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupDesc)
+        </dd>
+
+        <hr />
+        <dt></dt>
+        <dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <a href="@Url.Action("nhomnguoidung")" class="btn btn-info" style="border-radius: 0px;"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Quay lại</a> |
+                    <button type="submit" class="btn btn-danger" style="border-radius:0">
+                        <i class="fa fa-trash"></i>&emsp;Xóa&emsp;
+                    </button>
+                </div>
+            }
+        </dd>
+
+    </dl>
+</div>

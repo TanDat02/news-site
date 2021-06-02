@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DVCP.Models.User1>
+
+@{
+    ViewBag.Title = "quanLyTaiKhoan";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> Danh Sách Tài Khoản Người Dùng</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+<table class="table table-striped table-sm" style="width:100%; margin-top:-10px; ">
+    <thead>
+        <tr>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.EmailID)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.UserPhone)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.UserGender)
+            </th>
+            <th style="text-align: right; vertical-align: middle; width:120px">
+                <button type="button" class="btn btn-success  btn-sm" style="width:105px; border-radius: 0px;" title="Thêm"
+                        onclick="location.href='@Url.Action("createUser", "User")'">
+                    <i class="fa fa-plus"></i><span> Thêm mới</span>
+                </button>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.EmailID)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.UserPhone)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @*@Html.DisplayFor(modelItem => item.UserGender)*@
+                    @{if (item.UserGender)
+                        {
+                            <label>Nam</label>
+                        }
+                        else
+                        {
+                            <label>Nữ</label>
+                        }
+                    }
+                </td>
+                <td style="text-align: right; vertical-align: middle; width:120px;">
+                    <div class="btn-group" role="group" aria-label="updaterecord">
+                        @*<button type="button" class="btn btn-outline-primary btn-sm" style="border-radius:0px;" title="Đổi mật khẩu"
+                                    onclick="location.href='@Url.Action("adminResetPass", "User", new { id = item.UserID })'">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                            </button>*@
+                        <button type="button" class="btn btn-info btn-sm" style="border-radius:0px;" title="Xem"
+                                onclick="location.href='@Url.Action("chiTietTaiKhoan", "User", new { id = item.UserID })'">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius:0px;margin-left:2px;" title="Sửa"
+                                onclick="location.href='@Url.Action("taiKhoanCapNhat", "User", new { id = item.UserID })'">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" style="border-radius:0px; margin-left:2px;" title="Xóa"
+                                onclick="location.href='@Url.Action("taiKhoanXoa", "User", new { id = item.UserID })'">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+                        }
+    </tbody>
+</table>

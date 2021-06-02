@@ -1,0 +1,86 @@
+.box-fp-slider {width:100%; }
+.box-fp-slider .wrapper, .box-fp-slider .box-carousel, .box-fp-slider .box-carousel, 
+.box-fp-slider #large-section {/*width:517px*/width:100%; }
+.box-fp-slider #large-section  img {width:100%; height:350px}
+.box-fp-slider #large-section, .box-fp-slider .small-section {position:relative}
+/*.box-fp-slider .small-section{border:1px solid #eeeeee;}*/
+.box-fp-slider .wrapper {float:left;position:relative;}
+/*.small-section{float: left;
+    position: relative;
+    width: 251px;
+    height: 143px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    margin-left: 5px;}*/
+.box-fp-slider .top-small {float: right;
+    position: relative;
+   /* width: 260px;
+    height: 143px;*/
+    width: 135px;height: 170px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.box-fp-slider .top-small img {
+    padding-top: 5px;
+    width:100%;  height: 115px;
+    -webkit-transition-duration: 1.0s;
+    -moz-transition-duration: 1.0s;
+    -o-transition-duration: 1.0s}
+/*.box-fp-slider .top-small:hover img {-webkit-transform:scale(1.2);-moz-transform:scale(1.2);-o-transform:scale(1.2);}*/
+.box-fp-slider .top-small .feat-cap a{font-size:13px;padding: 5px 10px 7px 10px;width: 100%;/*background:rgba(0,0,0,0.5)*/}
+.box-fp-slider #large-section img {-webkit-transition-duration: 1.0s;-moz-transition-duration: 1.0s;-o-transition-duration: 1.0s}
+.box-fp-slider #large-section:hover img {-webkit-transform:scale(1.2);-moz-transform:scale(1.2);-o-transform:scale(1.2);}
+.box-fp-slider #large-section .feat-cap, .box-fp-slider .small-section .feat-cap
+{position: absolute;left: 0;bottom: 0;width: 100%;padding: 5px 10px 10px 10px;background:rgba(0,0,0,0.5)}
+.box-fp-slider .top-small .feat-cap {
+    color: #000000;
+    font-weight:500;width: 100%;
+   /* -webkit-transition-duration: 1.0s;
+    -moz-transition-duration: 1.0s;-o-transition-duration:1.0s;*/
+}
+.box-fp-slider .feat-cap,.box-fp-slider .feat-cap .post-title a,.box-fp-slider .feat-cap a {
+    color: #ddd;text-decoration: none
+}
+.box-fp-slider .feat-cap .post-title a:hover, .box-fp-slider .feat-cap a:hover {color: #fff000}
+/*.box-fp-slider .small-section:hover .feat-cap{bottom:-180px}*/
+.box-fp-slider #large-section .metainfo {color:#ddd;margin-top:8px;font-size:11px;color:#ccc}
+.box-fp-slider #large-section .metainfo span {margin-right:10px}
+.box-fp-slider #large-section .metainfo .fa {margin-right:3px}
+.box-fp-slider #large-section h2:hover{background:rgba(0,0,0,0.8)}
+.box-fp-slider #large-section h2{position:absolute;top:0;left:0;height:30px;background:#090;
+font-size:12px;text-transform:uppercase;font-weight:700;line-height: 30px;-moz-transition: all .3s ease-in;-o-transition: all .3s ease-in;cursor:pointer;
+-webkit-transition: all .3s ease-in;transition: all .3s ease-in;padding:0 10px;color: #fff}
+.owl-prev-box{right:15px;color:#fff;background:rgba(0,0,0,0.5);padding: 5px 0}
+.owl-next-box{right:60px;color:#fff;background:rgba(0,0,0,0.5);padding: 5px 0}
+.owl-prev-box:before{content:"\f054"}
+.owl-next-box:before{content:"\f053"}
+.owl-nav-box div:before{display:inline-block;font-family:FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.owl-nav-box{position:absolute;top:10px;right:10px;height:20px;width:120px;z-index:2}
+.owl-nav-box > div{width:30px;margin:0 3px 0 0;float:right;right:auto;text-align:center;cursor:pointer}
+
+@media screen and (max-width:992px){
+.box-fp-slider .wrapper, .box-fp-slider .box-carousel, .box-fp-slider .box-carousel, 
+.box-fp-slider #large-section {width:453px}
+.box-fp-slider #small-section-wrap {width:472px}
+.box-fp-slider .top-small {width:226px}
+}
+@media screen and (max-width:767px){
+.box-fp-slider .wrapper, .box-fp-slider .box-carousel, .box-fp-slider .box-carousel, 
+.box-fp-slider #large-section {width:100%; height:100%}
+.box-fp-slider #large-section  img {width:100%; height:100%}
+.box-fp-slider #small-section-wrap {width:362px; height:220px}
+.box-fp-slider .top-small {width:171px; height:105px}
+.panel-heading-current-time{display: none;}
+}
+@media screen and (max-width:668px){
+.box-fp-slider .wrapper, .box-fp-slider .box-carousel, .box-fp-slider .box-carousel, 
+.box-fp-slider #large-section {/*width:370px; height:220px*/}
+.box-fp-slider #small-section-wrap {display:none}
+}
+@media (min-width:480px) and (max-width:667px){
+.box-fp-slider .wrapper, .box-fp-slider .box-carousel, .box-fp-slider .box-carousel, 
+.box-fp-slider #large-section {width:100%}
+}

@@ -1,0 +1,118 @@
+﻿@model DVCP.Models.Xa
+
+
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog" style="width: 650px;">
+    <div class="modal-content" style="border-radius:0px;">
+        <div class="modal-header" style="background:#00a65a;color:white;">
+
+            <h5 class="modal-title"><i class="fa fa-plus"></i><span> Thêm</span></h5>
+            <a href="#" class="close" data-dismiss="modal">&times;</a>
+        </div>
+        <div class="modal-body" style="font-size:13px;">
+            @using (Ajax.BeginForm("Create", "Xa", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "addFormId", role = "form" }))
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.huyenId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.huyenId, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.huyenId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.maHuyen, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.maHuyen, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.maHuyen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.maXa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.maXa, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.maXa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.tenXa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.tenXa, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.tenXa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.phanLoai, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.phanLoai, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Phân Loại", @title = "Phân Loại", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.phanLoai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.thuTuSapXep, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.thuTuSapXep, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Thứ Tự Sắp Xếp", @title = "Thứ Tự Sắp Xếp", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.thuTuSapXep, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.oid, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.oid, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Dân Số", @title = "Dân Số", autocomplete = "off", @id = "idAddhoten" } })
+                            @Html.ValidationMessageFor(model => model.oid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nguoiSuaId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nguoiSuaId, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                        @Html.ValidationMessageFor(model => model.nguoiSuaId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ngayChinhSua, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ngayChinhSua, "{0:dd/MM/yyyy}", new { @class = "form-control", @style = "min-width: 100%!important;", @placeholder = "Ngày Chỉnh Sửa", @title = "Ngày Chỉnh Sửa", autocomplete = "off", @id = "idAddngaysinh" })
+                        @Html.ValidationMessageFor(model => model.ngayChinhSua, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.trangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.trangThai, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                        @Html.ValidationMessageFor(model => model.trangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.donViChinhSua, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.donViChinhSua, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mã Tỉnh", @title = "Mã Tỉnh", autocomplete = "off", @id = "idAddhoten" } })
+                        @Html.ValidationMessageFor(model => model.donViChinhSua, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnAdd" onclick="return ThemSave();" style="width:82px;border-radius: 4px;"><i class="fa fa-save"></i> Thêm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;border-radius: 4px;border: 1px solid #ccc"><i class="fa fa-close"></i> Thoát</button>
+                </div>
+
+
+            }
+
+        </div>
+    </div>
+</div>

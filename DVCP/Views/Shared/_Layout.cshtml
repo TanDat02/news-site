@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/web/styles.css" rel="stylesheet" />
+    <link href="~/Content/web/web.css" rel="stylesheet" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
+    <meta property="og:image" content="@ViewBag.Image" />
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Tag">
+    <!-- Font -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/AdminLTE/plugins/font-awesome/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Merriweather:400,700%7CDroid+Serif:400,700" rel="stylesheet" type="text/css">
+    @* @Scripts.Render("~/bundles/modernizr")*@
+    @{
+        GetData data = new GetData();
+    }
+</head>
+<body>
+    <header>
+        <div>
+            <nav class="navbar navbar-inverse" style="background-color:#0567c9;">
+                  <div class="d-inline-block float-right mt-2 mr-4" >
+                    
+                    </div>
+            </nav>
+            <div class="container">
+
+                <div class="oflow-hidden color-ash font-9 text-sm-center ptb-sm-5">
+
+                    @*<ul class="float-left list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-10 toplink">
+                        <li><a class="pl-0 pl-sm-10" href="">Kênh tin tức</a></li>
+                        <li><a href="">Liên hệ</a></li>
+                        <li><a href="">Cộng tác</a></li>
+                        <li><a href="">Góp ý</a></li>
+                        <li><a href="">Thắc mắc</a></li>
+                        <li><a href="/Admin/index">Đăng nhâp</a></li>
+                        @if (Request.IsAuthenticated)
+                        {
+                    <li>@Html.ActionLink("Admin Panel", "Index", "Admin", null, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("Logout", "Logout", "User", null, new { @class = "nav-link" })</li>}
+                    </ul>*@
+                  
+                    @*<ul class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5">
+                            <li><a class="pl-0 pl-sm-10" href="#"><i class="fa fa-facebook-official"></i></a></li>
+
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>*@
+                </div>
+                <div id="header" class="row">
+                    <img class="img-responsive" alt="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH" src="~/uploads/banner-stnmt.gif"/" />
+                </div>
+            </div>
+            <!-- container -->
+        </div>
+
+        <div class="container " style="background-color:#3383d3;  border-radius: 5px" >
+           
+
+
+            <a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
+
+            <ul class="main-menu2 link float-left m-1"  id="main-menu" style="color: white">
+               
+                <li><a href="/Home/Home" style="color: white"><i class="nav-icon fa fa-home"></i></a></li>
+                <li><a href="/" style="color: white">Giới thiệu</a></li>
+                <li class="drop-down">
+                    <a href="/trieu-dai" style="color: white">Tin tức<i class="fa fa-caret-down"></i></a>
+                    <ul class="drop-down-menu drop-down-inner" style="color: white">
+                        @foreach (var i in data.GetEnumShowList().Take(6))
+                        {
+            <li><a  href="/trieu-dai/@i.slug-@i.value">@i.showname</a></li>}
+                        <li><a href="/trieu-dai/">Xem tất cả</a></li>
+                    </ul>
+                </li>
+                <li class="drop-down" style="color: white">
+                    <a style="color: white" href="/danh-muc/">Danh mục<i class="fa fa-caret-down"></i></a>
+                    <ul class="drop-down-menu drop-down-inner">
+                        @foreach (var i in data.GetListTags().Take(6))
+                        {
+            <li><a href="/danh-muc/@SlugGenerator.SlugGenerator.GenerateSlug(i.TagName.ToLower())-@i.TagID">@i.TagName</a></li>}
+                        <li><a href="/danh-muc/">Xem tất cả</a></li>
+                    </ul>
+                </li>
+                <li><a style="color: white" href="/danh-muc/du-an-project-12">Các bài viết nổi bật</a></li>
+                <li><a style="color: white" href="/tim-kiem">Tìm nâng cao</a></li>
+                <li><a style="color: white" href="#">Liên Hệ - Góp Ý</li>
+                <li><a style="color: white" href="#">Sơ Đồ Website</a></li>
+                <li><a style="color: white" href="#">Hỏi Đáp</a></li>
+            
+
+            </ul>
+
+            <div class="clearfix"></div>
+        </div><!-- container -->
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="text-center text-white" style="background-color:#3383d3;">
+        <!-- Grid container -->
+
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <a class="text-white" href="https://mdbootstrap.com/">  BẢN QUYỀN THUỘC VỀ SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH<br />Địa chỉ: 08 Hai Bà Trưng - Thành phố Quy Nhơn - Bình Định&nbsp;<br />Tel: 0256.3824853 - Fax: 0256.3824950 - Email: stnmt@binhdinh.gov.vn<br />Chịu trách nhiệm nội dung: Ông Trần Kỳ Quang - Phó Giám đốc Sở</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.3"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Content/web/tether.min.js"></script>
+    <script src="~/Content/web/scripts.js"></script>
+    <script src="~/Content/photoswipe/init.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

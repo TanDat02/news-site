@@ -1,0 +1,46 @@
+﻿@model DVCP.Models.systemgroup
+
+@{
+    ViewBag.Title = "nhomchitiet";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    dd {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+</style>
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> CHI TIẾT NHÓM</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupDesc)
+        </dd>
+
+        <hr />
+        <dt></dt>
+        <dd>
+            <a href="@Url.Action("nhomnguoidung")" class="btn btn-info" style="border-radius: 0px;"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Quay lại</a> |
+            <a href="@Url.Action("nhomcapnhat", new { id = Model.GroupId })" class="btn btn-primary" style="border-radius: 0px;"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Cập nhật</a>
+        </dd>
+
+    </dl>
+</div>

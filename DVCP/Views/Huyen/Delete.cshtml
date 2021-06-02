@@ -1,0 +1,139 @@
+﻿@model DVCP.Models.Huyen
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.slimscroll.min.js"></script>
+
+<style>
+    dt {
+        font-weight: normal;
+        color: gray;
+    }
+
+    dd {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div class="modal-dialog" style="width: 650px;">
+    <div class="modal-content" style="border-radius: 0px;">
+        <div class="modal-header" style="background:red;color:white;">
+
+            <h4 class="modal-title"><i class="fa fa-trash"></i><span>  Xóa</span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <div class="modal-body" style="font-size:13px;">
+
+            <div id="scroll-delete">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tinhId)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.tinhId)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.maTinh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.maTinh)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.maHuyen)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.maHuyen)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tenHuyen)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.tenHuyen)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.phanLoai)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.phanLoai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.thuTuSapXep)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.thuTuSapXep)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.oid)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.oid)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.nguoiSuaId)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.nguoiSuaId)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ngayChinhSua)
+                    </dt>
+                    <dd>
+                        @Html.Raw(@String.Format("{0:dd/MM/yyyy}", Model.ngayChinhSua))
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.trangThai)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.trangThai)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.donViChinhSua)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.donViChinhSua)
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="modal-footer">
+                @using (Ajax.BeginForm("Delete", "Huyen", new AjaxOptions { HttpMethod = "Post", OnSuccess = "DeleteSuccess" }, new { @class = "form-horizontal", @id = "delFormId", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.huyenId)
+                    <div class="form-actions no-color">
+                        <button type="button" class="btn btn-danger" onclick="return XoaSave(@Model.huyenId);" style="width:80px;border-radius: 0px;">
+                            <i class="fa fa-trash"></i>&emsp;Xóa&emsp;
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;border-radius: 4px;border: 1px solid #ccc">
+                            <i class="fa fa-close"></i>&emsp;Thoát&emsp;
+                        </button>
+                    </div>
+                }
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#scroll-delete').slimScroll({
+            height: '200px',
+            allowPageScroll: true,
+            alwaysVisible: true,
+            railVisible: true,
+            railColor: '#222',
+            railOpacity: 0.3,
+            wheelStep: 10
+        });
+    });
+</script>
+
+
+

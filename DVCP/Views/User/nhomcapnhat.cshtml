@@ -1,0 +1,53 @@
+﻿@model DVCP.Models.systemgroup
+
+@{
+    ViewBag.Title = "nhomcapnhat";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .control-label {
+        font-weight: normal;
+    }
+</style>
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> CẬP NHẬT THÔNG TIN</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GroupId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GroupName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GroupName, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%!important;" } })
+                @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GroupDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GroupDesc, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%!important;" } })
+                @Html.ValidationMessageFor(model => model.GroupDesc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Action("nhomnguoidung")" class="btn btn-info" style="border-radius: 0px;"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Quay lại</a> |
+                <button type="submit" class="btn btn-primary" style="border-radius:0">
+                    <i class="fa fa-save"></i> Lưu
+                </button>
+            </div>
+        </div>
+
+    </div>
+}

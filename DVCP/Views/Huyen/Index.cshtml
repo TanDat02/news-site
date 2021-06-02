@@ -1,0 +1,363 @@
+﻿
+@model PagedList.IPagedList<DVCP.Models.Huyen>
+@using PagedList;
+@using PagedList.Mvc;
+@using DVCP.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> DANH SÁCH HUYỆN</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+@using (Html.BeginForm("Index", "Huyen", FormMethod.Get))
+{
+    <!--LỌC TÌM: PHẦN HIỆN-->
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group" style="margin-top:-18px;">
+                <span class="input-group-addon" style="border:none;">Số dòng</span>
+                @Html.DropDownList("pagesize", new SelectList(new Dictionary<string, string> { { "10", "10" }, { "25", "25" }, { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1000", "1000" }, { "1000000", "Tất cả" } }, "Key", "Value"), new { @class = "form-control", @placeholder = "Số dòng tối đa trên một trang", @title = "Số dòng tối đa trên một trang", @id = "pagesizelist", @style = "min-width: 100%!important; border-radius: 0px;" })
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="input-group" style="margin-top:5px;">
+                @Html.TextBox("searchstring", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Nhập thông tin cần tìm", title = "Nhập thông tin cần tìm" })
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-flat" data-toggle="collapse" data-target="#LocTim" style="border-radius:0" placeholder="Tùy chọn mở rộng điều kiện lọc tìm" title="Tùy chọn mở rộng điều kiện lọc tìm">
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                    </button>
+                    <button type="submit" id="Find" name="Find" class="btn btn-info btn-flat" placeholder="Thực hiện lọc tìm dữ liệu" title="Thực hiện lọc tìm dữ liệu">Lọc tìm</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--LỌC TÌM: PHẦN ẨN-->
+    <div id="LocTim" class="collapse">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="tinh" style="font-weight: normal !important;">Huyện</label>
+                @Html.DropDownList("huyenId", (SelectList)ViewBag.Huyen, htmlAttributes: new { @class = "form-control", style = "min-width: 100%!important;", @placeholder = "Chọn Huyện" })
+            </div>
+
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+}
+<br />
+
+
+<table class="table table-striped" style="width:100%; margin-top:-15px;">
+    <thead>
+        <tr style="font-family: Cambria, Georgia, serif;border-top:1pt solid grey;">
+
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().tinhId)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().maTinh)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().maHuyen)
+            </th>
+            <th style="text-align: center; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().tenHuyen)
+            </th>
+            <th style="text-align: center; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().phanLoai)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().thuTuSapXep)
+            </th>
+            @*<th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().uid)
+            </th>*@
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().oid)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().nguoiSuaId)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ngayChinhSua)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().trangThai)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().donViChinhSua)
+            </th>
+            <th class="visible-md visible-lg" style="text-align: center; vertical-align: middle; width:25px">
+                <button type="button" class="btn btn-success btn-sm" onclick="ThemInit()" style="border-radius: 0px;">
+                    <span class="glyphicon glyphicon-plus"> Thêm</span>
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.tinhId)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.maTinh)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.maHuyen)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.tenHuyen)
+                </td>
+
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.phanLoai)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.thuTuSapXep)
+                </td>
+                @*<td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.uid)
+                </td>*@
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.oid)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.nguoiSuaId)
+                </td>
+
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.ngayChinhSua)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.trangThai)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.donViChinhSua)
+                </td>
+
+                <td class="visible-md visible-lg" style="text-align: center; vertical-align: middle;">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 0px;">
+                            <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" style="text-align: left; border-radius: 0px;">
+                            <li style="cursor: pointer"><a onclick="XemRecord(@item.huyenId)"><span class="glyphicon glyphicon-eye-open"></span> Xem thông tin</a></li>
+                            <li style="cursor: pointer"><a onclick="SuaRecord(@item.huyenId)"><span class="glyphicon glyphicon-edit"></span> Sửa thông tin</a></li>
+                            <li style="cursor: pointer"><a onclick="XoaRecord(@item.huyenId)"><span class="glyphicon glyphicon-trash"></span> Xóa thông tin</a></li>
+                        </ul>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!--======================================================================-->
+<!--======================================================================-->
+<table border="0" style="width:100%; margin: 0px 0px 0px 0px;">
+    <tr>
+        <td style="text-align: left; width:135px">
+            Tổng mẫu tin @ViewBag.RowsCount
+        </td>
+        <td style="text-align: center;">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+       {
+           page,
+           pagesize = ViewBag.PageSize,
+           currentfilter = ViewBag.CurrentFilter,
+           tinhId = ViewBag.TinhId
+       }))
+        </td>
+        <td style="text-align: right; width:100px">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </td>
+    </tr>
+</table>
+
+<!--======================================================================-->
+<!--======================================================================-->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModal" aria-hidden="true" data-backdrop="static">
+    <div id="createContainer"></div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true" data-backdrop="static">
+    <div id="editContainer"></div>
+</div>
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="DetailsModal" aria-hidden="true" data-backdrop="static">
+    <div id="detailsContainer"></div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true" data-backdrop="static">
+    <div id="deleteContainer"></div>
+</div>
+
+
+<!--======================================================================-->
+<!--======================================================================-->
+<!--======================================================================-->
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        /*===================================================*/
+        /*===================================================*/
+        $('#pagesizelist').on('change', function (event) {
+            var form = $(event.target).parents('form');
+            form.submit();
+        });
+
+        /*===================================================*/
+        /*===================================================*/
+        function ThemInit() {
+            var url = '@Url.Action("Create","Huyen")';
+            $.get(url, function (data) {
+                $('#createContainer').html(data);
+                $('#createModal').modal('show');
+                $('#idAddngayChinhSua').datepicker({
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                });
+            });
+        }
+        function ThemVali() {
+            var isValid = true;
+            if ($('#idAddtenHuyen').val().trim() == "") {
+                $('#idAddtenHuyen').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idAddtenHuyen').css('border-color', 'lightgrey');
+            }
+            if ($('#idAddngayChinhSua').val().trim() == "") {
+                $('#idAddngayChinhSua').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idAddngayChinhSua').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+        function ThemSave() {
+            var res = ThemVali();
+            if (res == false) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("Create", "Huyen")',
+                type: 'POST',
+                data: $('#addFormId').serialize(),
+                success: function (response) {
+                    if (response.success == false)
+                        alert(response.message);
+                    $('#createModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function XemRecord(id) {
+            var url = '@Url.Action("Details", "Huyen")';
+            $.get(url + '/' + id, function (data) {
+                $('#detailsContainer').html(data);
+                $('#detailsModal').modal('show');
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function SuaRecord(id) {
+            var url = '@Url.Action("Edit", "Huyen")';
+            $.get(url + '/' + id, function (data) {
+                $('#editContainer').html(data);
+                $('#editModal').modal('show');
+                $('#idEditngayChinhSua').datepicker({
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                });
+            });
+        }
+        function SuaVali() {
+            var isValid = true;
+            if ($('#idEdittenHuyen').val().trim() == "") {
+                $('#idEdittenHuyen').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idEdittenHuyen').css('border-color', 'lightgrey');
+            }
+            if ($('#idEditngayChinhSua').val().trim() == "") {
+                $('#idEditngayChinhSua').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idEditngayChinhSua').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+        function SuaSave() {
+            var res = SuaVali();
+            if (res == false) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("Edit", "Huyen")',
+                type: 'POST',
+                data: $('#editFormId').serialize(),
+                success: function (response) {
+                    if (response.success == false)
+                        alert(response.message);
+                    $('#createModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function XoaRecord(id) {
+            var url = '@Url.Action("Delete", "Huyen")';
+            $.get(url + '/' + id, function (data) {
+                $('#deleteContainer').html(data);
+                $('#deleteModal').modal('show');
+            });
+        }
+        function XoaSave(id) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Huyen")/' + id,
+                type: 'POST',
+                data: $('#delFormId').serialize(),
+                success: function (response) {
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+    </script>
+}
+
+Đang hiển thị 2839580191844627513.

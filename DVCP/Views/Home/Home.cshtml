@@ -1,0 +1,1595 @@
+﻿@model IEnumerable<DVCP.Models.Post>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+
+@{
+    //ViewBag.Title = "Home Page";
+    GetData data = new GetData();
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+<head>
+    <title>SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH</title>
+    <meta name="description" content="Chào mừng đến với trang thông tin điện tử SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH">
+    <meta name="author" content="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH">
+    <meta name="copyright" content="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH [truyenbv211840729@gmail.com]">
+    <meta name="robots" content="index, archive, follow, noodp">
+    <meta name="googlebot" content="index,archive,follow,noodp">
+    <meta name="msnbot" content="all,index,follow">
+    <meta name="generator" content="NukeViet v4.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:title" content="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Chào mừng đến với trang thông tin điện tử SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH">
+    <meta property="og:site_name" content="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH">
+    <meta property="og:url" content="https://stnmt.binhdinh.gov.vn/vi/">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="canonical" href="https://stnmt.binhdinh.gov.vn/vi/">
+    <link rel="alternate" href="/vi/news/rss/" title="Tin Tức" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/tin-hoat-dong-cua-so/" title="Tin Tức - Tin hoạt động của Sở" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/do-dac-ban-do/" title="Tin Tức - Đo đạc bản đồ" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/quan-ly-dat-dai/" title="Tin Tức - Quản lý đất đai" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/dia-chat-khoang-san/" title="Tin Tức - Địa chất - Khoáng sản" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/bien-va-hai-dao/" title="Tin Tức - Biển và Hải Đảo" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/khi-tuong-thuy-van/" title="Tin Tức - Khí tượng thủy văn" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/tai-nguyen-nuoc/" title="Tin Tức - Tài nguyên nước" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/hoat-dong-dang-doan-the/" title="Tin Tức - Hoạt động Đảng - Đoàn thể" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/moi-truong/" title="Tin Tức - Môi trường" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/cac-thong-tin-khac/" title="Tin Tức - Các thông tin khác" type="application/rss+xml">
+    <link rel="alternate" href="/vi/news/rss/cai-cach-hanh-chinh/" title="Tin Tức - Cải cách hành chính" type="application/rss+xml">
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/new.css">
+    <link rel="stylesheet" href="~/assets/css/style-blue.css">
+    <link rel="stylesheet" href="~/assets/css/style-responsive.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/theme.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/index.css">
+    <link rel="stylesheet" href="~/assets/css/animation.css">
+    <link rel="stylesheet" href="~/assets/css/default.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/AdminLTE/plugins/font-awesome/css/font-awesome.min.css">
+    @* @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+
+    <noscript>
+        <div class="alert alert-danger">Trình duyệt của bạn đã tắt chức năng hỗ trợ JavaScript.<br />Website chỉ làm việc khi bạn bật nó trở lại.<br />Để tham khảo cách bật JavaScript, hãy click chuột <a href="http://wiki.nukeviet.vn/support:browser:enable_javascript">vào đây</a>!</div>
+    </noscript>
+    <div class="body-bg">
+        <div class="wraper bg-shadow-body">
+            <header>
+                <div class="container">
+
+                    <div id="header" class="row">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/Admin/index">Đăng nhâp</a></li>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Admin Panel", "Index", "Admin", null, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Logout", "Logout", "User", null, new { @class = "nav-link" })</li>}
+                        </ul>
+                        <img class="img-responsive" alt="SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH" src="~/uploads/banner-stnmt.gif"/" />
+                    </div>
+
+
+
+                </div>
+                <!-- Begin EMC Tracking Code -->
+                <!-- End EMC Tracking Code -->
+            </header>
+            <nav class="navbar navbar-inverse" style="background-color:#3383d3">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><a class="home" title="Trang nhất" href="/vi/"><em class="fa fa-lg fa-home">&nbsp;</em><!-- Trang chủ --></a></li>
+                            <li><a href="#">Giới Thiệu</a></li>
+                            <li class="dropdown">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tin Tức <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var i in data.GetEnumShowList())
+                                    {
+                                        <li><a href="/trieu-dai/@i.slug-@i.value">@i.showname</a></li>
+                                    }
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Danh Mục <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var i in data.GetListTags())
+                                    {
+                                        <li><a href="/danh-muc/@SlugGenerator.SlugGenerator.GenerateSlug(i.TagName.ToLower())-@i.TagID">@i.TagName</a></li>
+                                    }
+                                </ul>
+                            </li>
+                            <li><a style="color: white" href="/danh-muc/du-an-project-12">Các bài viết nổi bật</a></li>
+                            <li><a style="color: white" href="/tim-kiem">Tìm nâng cao</a></li>
+                            <li><a href="#">Liên Hệ - Góp Ý</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quy Hoạch <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Cấp Tỉnh</a></li>
+                                    <li><a href="#">Cấp huyện</a></li>
+                                    <li><a href="#">Cấp xã</a></li>
+                                </ul>
+                            </li>
+                           
+
+                            <li><a href="#">Hỏi Đáp</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </nav><section>
+                <div class="container" id="body">
+                    <nav class="third-nav">
+                        <div class="row">
+                            <div class="bg">
+                                <div class="clearfix">
+                                    <div class="col-xs-24 col-sm-5 col-md-5">
+                                        <span class="current-time">Thứ ba, 27/04/2021, 10:28</span>
+                                    </div>
+                                    <div class="headerSearch col-xs-24 col-sm-13 col-md-13">
+                                        <div class="marque-text"><marquee scrollamount="7" scrolldelay="90" onmouseover="this.stop();" onmouseout="this.start();">Chào mừng đến với trang thông tin điện tử  SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH</marquee></div>
+                                    </div>
+                                    <div class="headerSearch col-xs-24 col-sm-6 col-md-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" maxlength="60" placeholder="Tìm kiếm..."><span class="input-group-btn"><button type="button" class="btn btn-info" data-url="/vi/seek/?q=" data-minlength="3" data-click="y"><em class="fa fa-search fa-lg"></em></button></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="row bg-body-new">
+
+                        <div class="col-sm-16 col-md-18 fix-more-padding">
+                            <div class="row border-bottom-news">
+                                <div class="col-sm-8 col-md-8">
+                                    <div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=42&amp;s=2282bb2ed1a91c0a4c3c037667f75489" onclick="this.target='_blank'" title="In lịch công tác"> <img class="img-responsive" alt="In lịch công tác" src="/uploads/banner-inlichcongtac-new.jpg" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=28&amp;s=67cc4b2c48b1cc08750855aadc496bea" onclick="this.target='_blank'" title="vpdt"> <img class="img-responsive" alt="vpdt" src="/uploads/vpdt_2.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=29&amp;s=70b44d3643848698acf54d88ea79e87f" onclick="this.target='_blank'" title="Thư điện tử"> <img class="img-responsive" alt="Thư điện tử" src="/uploads/tdt.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=5&amp;s=dcbfe08ccf8f0ab4e2d25c928fd47f2b" onclick="this.target='_self'" title="Dịch vụ công"> <img class="img-responsive" alt="Dịch vụ công" src="/uploads/dvctt.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=24&amp;s=fd3291ca24517b59767ef0a23c1f45b7" onclick="this.target='_self'" title="Văn bản pháp luật"> <img class="img-responsive" alt="Văn bản pháp luật" src="/uploads/vbpl_1.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=25&amp;s=aa2d9ddfa5bb69378fcc6126ff35f567" onclick="this.target='_self'" title="Cải cách hành chính"> <img class="img-responsive" alt="Cải cách hành chính" src="/uploads/cchc_1.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=14&amp;s=bd7aa0356ea1bf1395d0bbd932d374ee" onclick="this.target='_self'" title="Văn bản dự thảo"> <img class="img-responsive" alt="Văn bản dự thảo" src="/uploads/vbdt.png" /> </a>
+                                    </div><div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=9&amp;s=0f629df1b40d77fd5c2181198daef9af" onclick="this.target='_blank'" title="Lịch công tác"> <img class="img-responsive" alt="Lịch công tác" src="/uploads/lct_1.png" /> </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-16 col-md-16">
+                                    <div class="box-fp-slider">
+                                        <div class="wrapper">
+                                            <!-- <div class="owl-nav-box"></div>	 -->
+                                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                                <!-- Indicators -->
+                                                
+
+
+
+                                                <div id="large-section" class="fadeUp">
+                                                    <div class="row">
+                                                        <div class="col-sm-24">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "NB")
+                                                                {
+                                                                    <div class="panel-body">
+                                                                        <a href="/bai-viet/@item.post_slug">
+                                                                            <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 600px" alt="@item.post_title"
+                                                                                 ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                            </a>
+                                                            </div>
+                                                            }
+                                                            }
+
+                                                                        </div><!-- END: col-sm-12 -->
+                                                        <!-- <a title="Tài nguyên nước" href="/vi/news/tai-nguyen-nuoc"><h2>Tài nguyên nước</h2></a>
+                 -->
+                                                        <div class="col-sm-24">
+                                                            <div class="feat-cap">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "NB")
+                                                                {
+                                                                <a href="/bai-viet/@item.post_slug" 
+                                                                   title="@item.post_title">
+                                                                <h3 class="post-title">@item.post_teaser</h3></a>
+
+                                                                <div class="metainfo">
+                                                                   
+                                                                    <span><i class="fa fa-calendar"></i>@item.create_date</span>
+                                                                    <span><i class="fa fa-calendar"></i>@item.edit_date</span>
+                                                                    <span><i class="fa fa-eye"></i>@item.ViewCount</span>
+                                                                </div>
+                                                                }
+                                                            }
+                                                            </div>
+                                                            <!-- <div class="panel-body">
+                    <p class="text-justify">Ngày 13/4/2021, Bộ Nông nghiệp và Phát triển nông thôn đã ban hành văn bản số 2136/BNN-TCTL về việc tổ chức hưởng ứng Tuần lễ Quốc Nước sạch và Vệ sinh môi trường năm 2021 gửi Ủy ban nhân dân các tỉnh, thành phố trực thuộc Trung ương.</p>
+                    </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="large-section" class="fadeUp">
+                                                    <div class="row">
+                                                     
+                                                        <!-- <a title="Quản lý đất đai" href="/vi/news/quan-ly-dat-dai"><h2>Quản lý đất đai</h2></a>
+                 -->
+                                                        <div class="col-sm-24">
+
+                                                            <!-- <div class="panel-body">
+                    <p class="text-justify">Ngày 17/3/2021, Bộ Tài nguyên và Môi trường ban hành Văn bản số 1213/BTNMT-VTQG về việc cung cấp và công bố siêu dữ liệu viễn thám quốc gia gửi các bộ, cơ quan ngang bộ, cơ quan thuộc Chính phủ và UBND các tỉnh, thành phố trực thuộc trung ương.</p>
+                    </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row small-section top-small" style="width:177.33px">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        if (item.post_tag == "NB")
+                                                        {
+                                                            <a href="/bai-viet/@item.post_slug">
+                                                                <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 382px" alt="@item.post_title"
+                                                                     ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                </a>
+                                                <div class="feat-cap">
+                                                    <a href="/bai-viet/@item.post_slug"
+                                                        title="@item.post_title">
+                                                        @item.post_teaser
+                                                    </a>
+                                                </div>
+                                                        }
+                                                    }
+                                            </div>
+                                            <div class="row small-section top-small" style="width:177.33px">
+
+                                              @foreach (var item in Model)
+                                              {
+                                                  if (item.post_tag == "TG")
+                                                  {
+                                                    <a href="/bai-viet/@item.post_slug">
+                                                        <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 382px" alt="@item.post_title"
+                                                             ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                        </a>
+                                                                <div class="feat-cap">
+                                                                    <a href="/bai-viet/@item.post_slug"
+                                                                       title="@item.post_title">
+                                                                      @item.post_title
+                                                                    </a>
+                                                                </div>
+                                                  }
+                                              }
+                                            </div>
+                                            <div class="row small-section top-small" style="width:161px">
+
+                                              @foreach (var item in Model)
+                                              {
+                                                  if (item.post_tag == "XH")
+                                                  {
+                                                    <a href="/bai-viet/@item.post_slug">
+                                                        <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 382px" alt="@item.post_title"
+                                                             ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                        </a>
+                                                                <div class="feat-cap">
+                                                                    <a href="/bai-viet/@item.post_slug"
+                                                                       title="@item.post_title">
+                                                                        @item.post_title
+                                                                    </a>
+                                                                </div>
+                                                  }
+                                              }
+                                            </div>
+
+                                        </div>
+
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom-news">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="nv-block-banners">
+                                        <a rel="nofollow" href="/vi/banners/click/?id=11&amp;s=2b7fa024b9f33090d85d18ff1bd2eb5f" onclick="this.target='_blank'" title="Banner tuyên truyền"> <img class="img-responsive" alt="Banner tuyên truyền" src="/uploads/banner-tt1.png" /> </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="nv-block-banners">
+                                        <!-- <img alt="Banner tuyen tuyen 2" src="/uploads/banners/banner-tt2.png" width="535" height="149" /> -->
+                                        <img alt="Banner tuyen tuyen 2" src="/uploads/banner-tt2.png" class="img-responsive" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom-news">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="newstab-slide">
+                                        <div class="panel-body">
+                                            <div class="box-icon-title" id="style-3">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel-47" class="active" data-toggle="newtabslide">Tất cả bài viết</a></h2></li>
+                                                 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper" style="height: 4000px">
+                                            <div class="newstabhomejcarousel-ctn" id="newstabhomejcarousel-47">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <div class="panel-body">
+                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                        <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                             ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                        </a>
+                                                                        <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                        <span class="icon_new">&nbsp;</span>
+                                                                        <div class="text-muted">
+                                                                            <ul class="list-unstyled list-inline">
+                                                                                <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <p class="text-right">
+                                                                        </p>
+                                                                        <ul class="related">
+                                                                            <li class="icon_list">
+                                                                                <a href="/bai-viet/@item.post_slug">
+                                                                                    <img alt="" alt="@item.post_title"
+                                                                                         " href="/bai-viet/@item.post_slug">
+                                                                                    @item.post_teaser
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="newstabhomejcarousel-ctn" id="newstabhomejcarousel-10">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newstab-slide">
+                                        <div class="box-icon-title box-icon-titles" id="style-3">
+                                            <div class="panel-body">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel2-8" class="active" data-toggle="newtabslide2">Thể thao</a></h2></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper2" style="height: 800px">
+                                            <div class="newstabhomejcarousel-ctn2" id="newstabhomejcarousel2-8">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "TT")
+                                                                {
+                                                                <div class="panel-body">
+                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                        <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                             ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                        </a>
+                                                                        <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                        <span class="icon_new">&nbsp;</span>
+                                                                        <div class="text-muted">
+                                                                            <ul class="list-unstyled list-inline">
+                                                                                <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <p class="text-right">
+                                                                        </p>
+                                                                        <ul class="related">
+                                                                            <li class="icon_list">
+                                                                                <a href="/bai-viet/@item.post_slug">
+                                                                                    <img alt="" alt="@item.post_title"
+                                                                                         " href="/bai-viet/@item.post_slug">
+                                                                                    @item.post_teaser
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    }
+                                                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="newstabhomejcarousel-ctn2" id="newstabhomejcarousel2-49">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newstab-slide">
+                                        <div class="panel-body">
+                                            <div class="box-icon-title" id="style-3">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel4-53" class="active" data-toggle="newtabslide4">Xã hội</a></h2></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper4" style="height: 800px">
+                                            <div class="newstabhomejcarousel-ctn4" id="newstabhomejcarousel4-53">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "XH")
+                                                                {
+                                                                    <div class="panel-body">
+                                                                        <a href="/bai-viet/@item.post_slug">
+                                                                            <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                                 ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                            </a>
+                                                                            <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                            <span class="icon_new">&nbsp;</span>
+                                                                            <div class="text-muted">
+                                                                                <ul class="list-unstyled list-inline">
+                                                                                    <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                    <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <p class="text-right">
+                                                                            </p>
+                                                                            <ul class="related">
+                                                                                <li class="icon_list">
+                                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                                        <img alt="" alt="@item.post_title"
+                                                                                             " href="/bai-viet/@item.post_slug">
+                                                                                        @item.post_teaser
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="newstabhomejcarousel-ctn4" id="newstabhomejcarousel4-66">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="newstab-slide">
+                                        <div class="box-icon-title box-icon-titles" id="style-3">
+                                            <div class="panel-body">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel1-50" class="active" data-toggle="newtabslide1">Đời sống</a></h2></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper1" style="height: 800px">
+                                            <div class="newstabhomejcarousel-ctn1" id="newstabhomejcarousel1-50">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "DS")
+                                                                {
+                                                                    <div class="panel-body">
+                                                                        <a href="/bai-viet/@item.post_slug">
+                                                                            <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                                 ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                            </a>
+                                                                            <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                            <span class="icon_new">&nbsp;</span>
+                                                                            <div class="text-muted">
+                                                                                <ul class="list-unstyled list-inline">
+                                                                                    <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                    <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <p class="text-right">
+                                                                            </p>
+                                                                            <ul class="related">
+                                                                                <li class="icon_list">
+                                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                                        <img alt="" alt="@item.post_title"
+                                                                                             " href="/bai-viet/@item.post_slug">
+                                                                                        @item.post_teaser
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="newstabhomejcarousel-ctn1" id="newstabhomejcarousel1-52">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newstab-slide">
+                                        <div class="box-icon-title box-icon-titles" id="style-3">
+                                            <div class="panel-body">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel3-46" class="active" data-toggle="newtabslide3">Quân sự</a></h2></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper3" style="height: 800px">
+                                            <div class="newstabhomejcarousel-ctn3" id="newstabhomejcarousel3-46">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "QS")
+                                                                {
+                                                                    <div class="panel-body">
+                                                                        <a href="/bai-viet/@item.post_slug">
+                                                                            <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                                 ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                            </a>
+                                                                            <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                            <span class="icon_new">&nbsp;</span>
+                                                                            <div class="text-muted">
+                                                                                <ul class="list-unstyled list-inline">
+                                                                                    <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                    <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <p class="text-right">
+                                                                            </p>
+                                                                            <ul class="related">
+                                                                                <li class="icon_list">
+                                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                                        <img alt="" alt="@item.post_title"
+                                                                                             " href="/bai-viet/@item.post_slug">
+                                                                                        @item.post_teaser
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="newstabhomejcarousel-ctn3" id="newstabhomejcarousel3-48">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newstab-slide">
+                                        <div class="panel-body">
+                                            <div class="box-icon-title" id="style-3">
+                                                <ul class="mtab">
+                                                    <li><h2><a href="#newstabhomejcarousel5-67" class="active" data-toggle="newtabslide5">Thế giới</a></h2></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default newstabhomejcarousel-wraper5" style="height: 800px">
+                                            <div class="newstabhomejcarousel-ctn5" id="newstabhomejcarousel5-67">
+                                                <div class="news_column col-md-24">
+                                                    <div class="clearfix">
+                                                        <div class="panel-body">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                if (item.post_tag == "TG")
+                                                                {
+                                                                    <div class="panel-body">
+                                                                        <a href="/bai-viet/@item.post_slug">
+                                                                            <img class="img-thumbnail pull-left imghome" alt="" src="~/Upload/images/@item.AvatarImage" style="width: 383px" alt="@item.post_title"
+                                                                                 ror="this.onerror=null;this.src='/Content/web/images/top-post1.jpg';" href="/bai-viet/@item.post_slug">@item.post_title
+                                                                            </a>
+                                                                            <a class="xlinkmain" href="/vi/news/tin-hoat-dong-cua-so/so-tai-nguyen-va-moi-truong-quan-triet-viec-tiep-tuc-thuc-hien-nghiem-cac-bien-phap-phong-chong-dich-benh-covid-19-256.html" title="Sở Tài nguyên và Môi trường quán triệt việc tiếp tục thực hiện nghiêm các biện pháp phòng, chống dịch bệnh Covid-19"></a>
+                                                                            <span class="icon_new">&nbsp;</span>
+                                                                            <div class="text-muted">
+                                                                                <ul class="list-unstyled list-inline">
+                                                                                    <li><em class="fa fa-clock-o">&nbsp;</em>@String.Format("{0:dd-MM-yyyy}", item.create_date)</li>
+                                                                                    <li><em class="fa fa-eye">&nbsp;</em>@item.ViewCount views </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <p class="text-right">
+                                                                            </p>
+                                                                            <ul class="related">
+                                                                                <li class="icon_list">
+                                                                                    <a href="/bai-viet/@item.post_slug">
+                                                                                        <img alt="" alt="@item.post_title"
+                                                                                             " href="/bai-viet/@item.post_slug">
+                                                                                        @item.post_teaser
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-24 col-md-24">
+                                    <div class="nv-block-banners">
+                                        <!-- <img alt="Liên kết 6" src="/uploads/banners/banner-tt3.png" width="800" height="111" /> -->
+                                        <img alt="Liên kết 6" src="/uploads/banner-tt3.png" class="img-responsive" />
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="boxesLink">
+                                            <ul>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/Bang-gia-dat.html#" title=""><img src="/uploads/lkg1.png" data-thumb="/assets/lkg1.png" alt="" title="#description-0" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/Danh-sach-cac-to-chuc-ca-nhan-hanh-nghe-trong-linh-vuc-tai-nguyen-nuoc.html#" title=""><img src="/uploads/lkg2.png" data-thumb="/assets/lkg2.png" alt="" title="#description-1" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/CONG-KHAI-DANH-SACH-CAC-CA-NHAN-TO-CHUC-VI-PHAM-PHAP-LUATDAT-DAI.html#" title=""><img src="/uploads/lkg3.png" data-thumb="/assets/lkg3.png" alt="" title="#description-2" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/DANH-SACH-CAC-CO-SO-O-NHIEM-MOI-TRUONG-O-NHIEM-MOI-TRUONG-NGHIEM-TRONG-CHUA-THUC-HIEN-XU-LY.html#" title=""><img src="/uploads/lkg4.png" data-thumb="/assets/lkg4.png" alt="" title="#description-3" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/TUYEN-TRUYEN-PHO-BIEN-CAC-LUAT-NGHI-QUYET-DUOC-THONG-QUA-TAI-KY-HOP-THU-3-QUOC-HOI-KHOA-XIV.html#" title=""><img src="/uploads/lkg5.png" data-thumb="/assets/lkg5.png" alt="" title="#description-4" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/TUYEN-TRUYEN-PHO-BIEN-CAC-LUAT-DUOC-THONG-QUA-TAI-KY-HOP-THU-4-QUOC-HOI-KHOA-XIV.html#" title=""><img src="/uploads/lkg6.png" data-thumb="/assets/lkg6.png" alt="" title="#description-5" /></a></li>
+                                                <li><a href="https://stnmt.binhdinh.gov.vn/vi/page/Cong-khai-Chieu-rong-ranh-gioi-hanh-lang-bao-ve-bo-bien-tinh-Binh-Dinh.html" title=""><img src="/uploads/banner-congkhai-rghlbvbb-1.jpg" data-thumb="/assets/banner-congkhai-rghlbvbb-1.jpg" alt="" title="#description-6" /></a></li>
+                                                <li><a href="https://stnmt.binhdinh.gov.vn/vi/page/Cong-khai-Ket-qua-danh-gia-hoat-dong-kiem-soat-o-nhiem-moi-truong-bien-va-hai-dao-nam-2019-tren-dia-ban-tinh-Binh-Dinh.html" title=""><img src="/uploads/banner-congkhai-moitruongbiendao2020.jpg" data-thumb="/assets/banner-congkhai-moitruongbiendao2020.jpg" alt="" title="#description-7" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/Luat-bien-Viet-Nam.html#" title=""><img src="/uploads/lkg9.png" data-thumb="/assets/lkg9.png" alt="" title="#description-8" /></a></li>
+                                                <li><a href="https://stnmt.binhdinh.gov.vn/vi/page/Luat-Dat-dai.html" title=""><img src="/uploads/lkg10.png" data-thumb="/assets/lkg10.png" alt="" title="#description-9" /></a></li>
+                                                <li><a href="https://stnmt.binhdinh.gov.vn/vi/page/Luat-Bao-ve-moi-truong.html" title=""><img src="/uploads/lkg11.png" data-thumb="/assets/lkg11.png" alt="" title="#description-10" /></a></li>
+                                                <li><a href="http://ccco.binhdinh.gov.vn/" title=""><img src="/uploads/lkg12.png" data-thumb="/assets/lkg12.png" alt="" title="#description-11" /></a></li>
+                                                <li><a href="https://stnmt.binhdinh.gov.vn/vi/page/Cong-khai-Bao-cao-danh-gia-tac-dong-moi-truong.html" title=""><img src="/uploads/banner_dtm2020.jpg" data-thumb="/assets/banner_dtm2020.jpg" alt="" title="#description-12" /></a></li>
+                                                <li><a href="http://stnmt.binhdinh.gov.vn/vi/page/THONG-TIN-DAU-GIA-QUYEN-KHAI-THAC-KHOANG-SAN-TINH-BINH-DINH.html#" title=""><img src="/uploads/banner-dgqktks-1.jpg" data-thumb="/assets/banner-dgqktks-1.jpg" alt="" title="#description-13" /></a></li>
+                                                <li><a href="http://cspl-tnmt.monre.gov.vn/" title=""><img src="/uploads/lkg15.png" data-thumb="/assets/lkg15.png" alt="" title="#description-14" /></a></li>
+                                                <li><a href="http://www.nchmf.gov.vn" title=""><img src="/uploads/lkg16.png" data-thumb="/assets/lkg16.png" alt="" title="#description-15" /></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="border-bottom-news">
+                                    <div class="panel-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-md-6 fix-more-padding">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="background-color: #0567c9;">
+                                    Danh Mục
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row menunavgreen">
+                                        <div>
+                                            <div class="clearfix">
+                                                @foreach (var i in data.GetListTags())
+                                                {
+                                                    <a style="text-align: center" href="/danh-muc/@SlugGenerator.SlugGenerator.GenerateSlug(i.TagName.ToLower())-@i.TagID">@i.TagName</a>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="c-title__tag--right">
+                                    <a href="javascript:void(0);" onclick="openCity1(event, 'London1')" id="defaultOpen1">Thông báo</a>
+                                    <a href="javascript:void(0);" onclick="openCity1(event, 'Paris1')">Văn bản mới</a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!-- Tab content -->
+                                        <div id="London1" class="tabcontent">
+                                            <p>-&nbsp;Thông báo đấu giá quyền sử dụng đất để thực hiện dự án tại khu đất HH-02 thuộc Khu đô thị Long Vân, phường Trần Quang Diệu, thành phố Quy Nhơn. Xem chi tiết <a href="/uploads/thong-bao/168.tb.ttptqd.2021.zip"><em>tại đây</em></a>./.<br />-&nbsp;Thông báo về việc hủy phôi Giấy chứng nhận quyền sử dụng đất (năm 2020) của&nbsp;&nbsp;tỉnh Bình Định. Xem chi tiết <a href="/uploads/thong-bao/22-tb-stnmt-2021-huy-phoi-gcn-da-bi-hu-hong.zip"><em>tại đây</em></a>./.<br />- Góp ý dự thảo Quyết định ban hành Quy định chế độ báo cáo định kỳ lĩnh vực tài nguyên và môi trường trên địa bàn tỉnh Bình Định.&nbsp;Xem chi tiết&nbsp;<a href="/uploads/thong-bao/gopybaocaonganhtnmt2021.zip"><em><strong>tại đây</strong></em></a>./.<br />- Kế hoạch thanh tra năm 2021&nbsp;của Sở&nbsp;Tài nguyên và Môi trường. Xem chi tiết&nbsp;<a href="/uploads/Kehoach_Thanhtra_2021(SoTNMT).zip"><em><strong>tại đây</strong></em></a>./.<br />- Thông báo&nbsp;số điện thoại, hộp thư điện tử,&nbsp;đường dây nóng của Sở Tài nguyên và Môi trường,<strong>&nbsp;</strong><a href="/uploads/01-tb-stnmt-2020.pdf">xem tại đây</a><br />-&nbsp;Công khai số điện thoại đường dây nóng thông báo các sự cố về an toàn thông tin của Sở Tài nguyên và Môi trường:<br />&nbsp; &nbsp;<em>+ Văn phòng Sở: <a>0256 3820806</a><br />&nbsp; &nbsp;+ Văn phòng Đăng ký đất đai: <a>0256 3823496</a></em></p>
+
+                                        </div>
+
+                                        <div id="Paris1" class="tabcontent">
+                                            <div class="block-law marquee" data-direction='up' data-duration='30000' data-pauseOnHover="true" data-duplicated="true" style="height: 200px; overflow: hidden;">
+                                                <div class="m-bottom item">
+                                                    <h3 class="law-code">
+                                                        <a href="/vi/laws/detail/Phe-duyet-Ke-hoach-phat-trien-nha-o-tinh-Binh-Dinh-giai-doan-2020-2025-93/" title="Phê duyệt Kế hoạch phát triển nhà ở tỉnh Bình Định giai đoạn 2020 - 2025">1411&#x002F;QĐ-UBND</a>
+                                                    </h3>
+                                                    <p class="law-title">Phê duyệt Kế hoạch phát triển nhà ở tỉnh Bình Định giai đoạn 2020 - 2025</p>
+                                                    <p class="text-muted law-view">Thời gian đăng: 26/04/2021</p>
+                                                    <em class="text-muted law-view">lượt xem: 1 | lượt tải:0</em>
+                                                </div>
+                                                <div class="m-bottom item">
+                                                    <h3 class="law-code">
+                                                        <a href="/vi/laws/detail/Sua-doi-bo-sung-mot-so-dieu-cua-Quy-dinh-ban-hanh-kem-theo-Quyet-dinh-so-29-2020-QD-UBND-ngay-27-5-2020-cua-Uy-ban-nhan-dan-tinh-ban-hanh-Quy-dinh-quan-ly-su-dung-nha-chung-cu-tren-dia-ban-tinh-Binh-Dinh-92/" title="Sửa đổi, bổ sung một số điều của Quy định ban hành kèm theo Quyết định số 29&#x002F;2020&#x002F;QĐ-UBND ngày 27&#x002F;5&#x002F;2020 của Ủy ban nhân dân tỉnh ban hành Quy định quản lý, sử dụng nhà chung cư trên địa bàn tỉnh Bình Định">11&#x002F;2021&#x002F;QĐ-UBND</a>
+                                                    </h3>
+                                                    <p class="law-title">Sửa đổi, bổ sung một số điều của Quy định ban hành kèm theo Quyết định số 29&#x002F;2020&#x002F;QĐ-UBND ngày 27&#x002F;5&#x002F;2020 của Ủy ban nhân dân tỉnh ban hành Quy định quản lý, sử dụng nhà chung cư trên địa bàn tỉnh Bình Định</p>
+                                                    <p class="text-muted law-view">Thời gian đăng: 08/04/2021</p>
+                                                    <em class="text-muted law-view">lượt xem: 11 | lượt tải:6</em>
+                                                </div>
+                                                <div class="m-bottom item">
+                                                    <h3 class="law-code">
+                                                        <a href="/vi/laws/detail/Ve-quan-ly-khoang-san-tai-cac-khu-vuc-du-tru-khoang-san-quoc-gia-90/" title="Về quản lý khoáng sản tại các khu vực dự trữ khoáng sản quốc gia">51&#x002F;2021&#x002F;NĐ-CP</a>
+                                                    </h3>
+                                                    <p class="law-title">Về quản lý khoáng sản tại các khu vực dự trữ khoáng sản quốc gia</p>
+                                                    <p class="text-muted law-view">Thời gian đăng: 06/04/2021</p>
+                                                    <em class="text-muted law-view">lượt xem: 10 | lượt tải:2</em>
+                                                </div>
+                                                <div class="m-bottom item">
+                                                    <h3 class="law-code">
+                                                        <a href="/vi/laws/detail/Sua-doi-bo-sung-mot-so-dieu-cua-Nghi-dinh-so-82-2017-ND-CP-ngay-17-thang-7-nam-2017-cua-Chinh-phu-quy-dinh-ve-phuong-phap-tinh-muc-thu-tien-cap-quyen-khai-thac-tai-nguyen-nuoc-89/" title="Sửa đổi, bổ sung một số điều của Nghị định số 82&#x002F;2017&#x002F;NĐ-CP ngày 17 tháng 7 năm 2017 của Chính phủ quy định về phương pháp tính, mức thu tiền cấp quyền khai thác tài nguyên nước">41&#x002F;2021&#x002F;NĐ-CP</a>
+                                                    </h3>
+                                                    <p class="law-title">Sửa đổi, bổ sung một số điều của Nghị định số 82&#x002F;2017&#x002F;NĐ-CP ngày 17 tháng 7 năm 2017 của Chính phủ quy định về phương pháp tính, mức thu tiền cấp quyền khai thác tài nguyên nước</p>
+                                                    <p class="text-muted law-view">Thời gian đăng: 06/04/2021</p>
+                                                    <em class="text-muted law-view">lượt xem: 8 | lượt tải:6</em>
+                                                </div>
+                                                <div class="m-bottom item">
+                                                    <h3 class="law-code">
+                                                        <a href="/vi/laws/detail/Sua-doi-bo-sung-mot-so-dieu-cua-Nghi-dinh-so-99-2015-ND-CP-ngay-20-thang-10-nam-2015-cua-Chinh-phu-quy-dinh-chi-tiet-va-huong-dan-thi-hanh-mot-so-dieu-cua-Luat-Nha-o-91/" title="Sửa đổi, bổ sung một số điều của Nghị định số 99&#x002F;2015&#x002F;NĐ-CP ngày 20 tháng 10 năm 2015 của Chính phủ quy định chi tiết và hướng dẫn thi hành một số điều của Luật Nhà ở">30&#x002F;2021&#x002F;NĐ-CP</a>
+                                                    </h3>
+                                                    <p class="law-title">Sửa đổi, bổ sung một số điều của Nghị định số 99&#x002F;2015&#x002F;NĐ-CP ngày 20 tháng 10 năm 2015 của Chính phủ quy định chi tiết và hướng dẫn thi hành một số điều của Luật Nhà ở</p>
+                                                    <p class="text-muted law-view">Thời gian đăng: 08/04/2021</p>
+                                                    <em class="text-muted law-view">lượt xem: 10 | lượt tải:6</em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="c-title__tag--left">
+                                <a href="javascript:void(0);" class="tablinks" onclick="openCity(event, 'Paris')" id="defaultOpen">Video</a>
+                                <a href="javascript:void(0);" class="tablinks" onclick="openCity(event, 'London')">Hình ảnh hoạt động</a>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div id="London" class="tabcontent1">
+                                        <div class="panel panel-border-title">
+                                            <div class="panel-body">
+                                                <div class="MagicSlideshow album-nv7" data-options="selectors: bottom; selectors-style: thumbnails; selectors-size: 40px;">
+                                                    <img src="/uploads/photos/images/2019/08/hinh-anh-hoat-dong/bia3tren.jpg" alt="Các đại biểu thanh dự kỳ họp thứ 13 HĐND tỉnh Khóa XI, nhiệm..." class="img-responsive" />
+                                                    <img src="/uploads/photos/images/2019/08/hinh-anh-hoat-dong/bia3.jpg" alt="Đ/c Võ Đình Thú Tỉnh ủy viên, Ủy viên thường trực HĐND tỉnh..." class="img-responsive" />
+                                                    <img src="/uploads/photos/images/2019/08/hinh-anh-hoat-dong/bia2t.jpg" alt="ĐC Nguyễn Thanh Tùng Ủy viên TW Đảng, Bí thứ Tỉnh ủy, Chủ..." class="img-responsive" />
+                                                    <img src="/uploads/photos/images/2019/08/hinh-anh-hoat-dong/bia2d.jpg" alt="Thường trực HĐND tỉnh và Tổ đại biểu huyện Phù Mỹ Khóa XI,..." class="img-responsive" />
+                                                    <img src="/uploads/photos/images/2019/08/hinh-anh-hoat-dong/bia-4-tren.jpg" alt="Thường trực và thư ký HĐND tỉnh khóa XI, nhiệm kỳ 2011-2016" class="img-responsive" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="Paris" class="tabcontent1">
+                                        <div class="col-md-24">
+                                            <div class="videoplayer">
+                                                <div id="videoContBlock_nv8">
+                                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-24">
+                                            <ul>
+                                                <li class="icon_list">
+                                                    <!-- <a href="/vi/videos/video-stnmt/thay-doi-thoi-quen-de-bao-ve-moi-truong-9.html" title="Thay đổi thói quen để bảo vệ môi trường"><i class="pull-left fa fa-film"></i></a> -->
+                                                    <a style="padding-left: 10px" title="Thay đổi thói quen để bảo vệ môi trường" href="/vi/videos/video-stnmt/thay-doi-thoi-quen-de-bao-ve-moi-truong-9.html">Thay đổi thói quen để bảo vệ môi trường</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=43&amp;s=879e07cc53464c54195d2ac80eb4d984" onclick="this.target='_blank'" title="Công khai hủy GCN toàn quốc"> <img class="img-responsive" alt="Công khai hủy GCN toàn quốc" src="/uploads/tb-huygcn-toanquoc.jpg" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=18&amp;s=577752ce1c7725d8765d475107fc347d" onclick="this.target='_blank'" title="Trang thông tin chỉ đạo điều hành"> <img class="img-responsive" alt="Trang thông tin chỉ đạo điều hành" src="/uploads/lkp10_1.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=19&amp;s=7286be54d57e61d1f58f1aeb0bfc0ed1" onclick="this.target='_parent'" title="Công báo chính phủ"> <img class="img-responsive" alt="Công báo chính phủ" src="/uploads/cong-bao_1.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=20&amp;s=74bba3b24c808b5ae4c112fed7f23c94" onclick="this.target='_blank'" title="Công báo Bình Định"> <img class="img-responsive" alt="Công báo Bình Định" src="/uploads/cong-bao-tinh.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=26&amp;s=9cbaa24f649cc668a094dd73f951d75c" onclick="this.target='_blank'" title="UBND Tỉnh"> <img class="img-responsive" alt="UBND Tỉnh" src="/uploads/cttdt-tinh.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=33&amp;s=130ed15e1546b214680a5522a13294d4" onclick="this.target='_blank'" title="Công dân hỏi - Giám đốc sở trả lời"> <img class="img-responsive" alt="Công dân hỏi - Giám đốc sở trả lời" src="/uploads/lkp2.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <!-- <img alt="Thông tin tuyển dụng" src="/uploads/banners/lkp3.png" width="260" height="58" /> -->
+                                <img alt="Thông tin tuyển dụng" src="/uploads/lkp3.png" class="img-responsive" />
+                            </div><div class="nv-block-banners">
+                                <!-- <img alt="Đánh giá mức độ hài lòng" src="/uploads/banners/lkp4.png" width="260" height="58" /> -->
+                                <img alt="Đánh giá mức độ hài lòng" src="/uploads/lkp4.png" class="img-responsive" />
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=36&amp;s=92afc050379868e22a79fd973b4d3d7e" onclick="this.target='_blank'" title="Tra cứu hồ sơ lưu trữ"> <img class="img-responsive" alt="Tra cứu hồ sơ lưu trữ" src="/uploads/lkp5.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=37&amp;s=9fd1b8a88bcb4c16bfec81ad2da97efa" onclick="this.target='_blank'" title="Danh mục văn bản TW hàng tuần"> <img class="img-responsive" alt="Danh mục văn bản TW hàng tuần" src="/uploads/lkp6.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=38&amp;s=86cd30512254c21469a3db0ab40911d6" onclick="this.target='_blank'" title="Thủ tục hành chính trả kết quả"> <img class="img-responsive" alt="Thủ tục hành chính trả kết quả" src="/uploads/lkp7.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=40&amp;s=86e96fb1c12e9ce819e721489bb53926" onclick="this.target='_blank'" title="Bộ TNMT"> <img class="img-responsive" alt="Bộ TNMT" src="/uploads/lkp13.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=41&amp;s=41bd7ba45c56eb5ff7ef4791fbd0d1fa" onclick="this.target='_blank'" title="Trung tâm Quan tắc TNMT"> <img class="img-responsive" alt="Trung tâm Quan tắc TNMT" src="/uploads/lkp14.png" /> </a>
+                            </div><div class="nv-block-banners">
+                                <a rel="nofollow" href="/vi/banners/click/?id=44&amp;s=3d73bee7045c92fa3b304575c088b21b" onclick="this.target='_blank'" title="Công khai biện pháp giao dịch đảm bảo"> <img class="img-responsive" alt="Công khai biện pháp giao dịch đảm bảo" src="/uploads/banner-congkhaibpbd-2020-1.jpg" /> </a>
+                            </div>
+                            <div class="panel panel-border-title">
+                                <div class="panel-heading">
+                                    <div>Thống kê truy cập</div>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="counter list-none display-table">
+                                        <li><span><em class="fa fa-bolt fa-lg fa-horizon"></em>Đang truy cập</span><span>15</span></li>
+                                        <li><span><em class="fa fa-filter fa-lg fa-horizon margin-top-lg"></em>Hôm nay</span><span class="margin-top-lg">978</span></li>
+                                        <li><span><em class="fa fa-calendar-o fa-lg fa-horizon"></em>Tháng hiện tại</span><span>55,390</span></li>
+                                        <li><span><em class="fa fa-bars fa-lg fa-horizon"></em>Tổng lượt truy cập</span><span>315,162</span></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-border-title">
+                                <div class="panel-heading">
+                                    <div>Liên kết Web</div>
+                                </div>
+                                <div class="panel-body">
+                                    <SELECT onchange="if (this.value != '#') window.open(this.value, '_blank');" style="width: 100%;">
+                                        <OPTION selected> - Select website - </OPTION>
+
+                                        <OPTION value="http://chinhphu.vn">Chính phủ</OPTION>
+
+                                        <OPTION value="http://thanhtra.com.vn/">Báo thanh tra</OPTION>
+
+                                        <OPTION value="http://www.thanhtra.gov.vn/Pages/Home.aspx">Thanh tra chính phủ</OPTION>
+                                    </SELECT>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row shadow-bg-2 bg-body-new fix-more-padding">
+                    </div> -->
+
+                </div>
+            </section>
+        </div>
+        <footer id="footer">
+            <div class="wraper">
+                <div class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <div class="wraper">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-24 col-md-24 color-text-footer margin-footer-site">
+                            BẢN QUYỀN THUỘC VỀ SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH<br />Địa chỉ: 08 Hai Bà Trưng - Thành phố Quy Nhơn - Bình Định&nbsp;<br />Tel: 0256.3824853 - Fax: 0256.3824950 - Email: stnmt@binhdinh.gov.vn<br />Chịu trách nhiệm nội dung: Ông Trần Kỳ Quang - Phó Giám đốc Sở
+
+                            <div class="col-md-24 text-right">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <nav class="footerNav2">
+            <div class="wraper">
+                <div class="container">
+                    <div class="bttop">
+                        <a class="pointer"><em class="fa fa-eject fa-lg"></em></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    </div>>
+
+    </div>
+
+
+    </div>
+    <!-- SiteModal Required!!! -->
+    <div id="sitemodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <em class="fa fa-spinner fa-spin">&nbsp;</em>
+                </div>
+                <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="fix_banner_left">
+    </div>
+    <div class="fix_banner_right">
+    </div>
+    <div class="site-btn-tool">
+        <div class="sitebtntool haveitem4">
+            <ul class="maintoolbtns">
+                <li><a href="https://www.facebook.com/stnmt" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.google.com/stnmt" target="_blank" class="google"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="/vi/feeds/" class="feeds"><i class="fa fa-rss"></i></a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="timeoutsess" class="chromeframe">
+        Bạn đã không sử dụng Site, <a onclick="timeoutsesscancel();" href="#">Bấm vào đây để duy trì trạng thái đăng nhập</a>. Thời gian chờ: <span id="secField"> 60 </span> giây
+    </div>
+    <div id="openidResult" class="nv-alert" style="display:none"></div>
+    <div id="openidBt" data-result="" data-redirect=""></div>
+    <script src="/assets/js/jquery/jquery.min.js?t=11"></script>
+    <script>
+var nv_base_siteurl="/",nv_lang_data="vi",nv_lang_interface="vi",nv_name_variable="nv",nv_fc_variable="op",nv_lang_variable="language",nv_module_name="news",nv_func_name="main",nv_is_user=0, nv_my_ofs=7,nv_my_abbr="ICT",nv_cookie_prefix="nv4c_w58uc",nv_check_pass_mstime=1738000,nv_area_admin=0,nv_safemode=0,theme_responsive=1,nv_is_recaptcha=0;
+    </script>
+    <script src="./js/language/vi.js"></script>
+    <script src="./js/global.js?t=11"></script>
+    <script src="./news.js?t=11"></script>
+    <script src="/assets/js/jquery/jquery.cookie.js?t=11"></script>
+    <script src="/themes/egov/js/main.js?t=11"></script>
+    <script src="/themes/egov/js/custom.js?t=11"></script>
+
+    <script type="text/javascript">
+                var _govaq = window._govaq || [];
+            _govaq.push(['trackPageView']);
+            _govaq.push(['enableLinkTracking']);
+            (function () {
+                _govaq.push(['setTrackerUrl', 'https://f-emc.ngsp.gov.vn/tracking']);
+                _govaq.push(['setSiteId', '238']);
+                var d = document,
+                    g = d.createElement('script'),
+                    s = d.getElementsByTagName('script')[0];
+                g.type = 'text/javascript';
+                g.async = true;
+                g.defer = true;
+                g.src = 'https://f-emc.ngsp.gov.vn/embed/gov-tracking.min.js';
+                s.parentNode.insertBefore(g, s);
+            })();
+    </script>
+    <script type="text/javascript" data-show="after">
+$(function(){
+checkWidthMenu();
+$(window).resize(checkWidthMenu);
+});
+    </script>
+    <script src="/themes/egov/js/owl.carousel.min.js?t=11"></script>
+    <script>
+$('.box-carousel').owlCarousel({
+    animateIn: 'fadeIn',
+    animateOut: 'fadeOut',
+    nav: true,
+    navText: [ '', '' ],
+    navContainer: '.owl-nav-box',
+    navClass: [ 'owl-prev-box', 'owl-next-box' ],
+loop:true,
+margin:10,
+dots: false,
+autoplay: true,
+    responsive:{
+        1:{
+    items:1
+        },
+        600:{
+    items:1
+        },
+        1000:{
+    items:1
+        }
+}
+});
+    </script>
+    <script type="text/javascript" src="/themes/egov/js/jquery.jcarousel.min.js?t=11"></script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn').hide();
+    $('.newstabhomejcarousel-ctn:first').show();
+    $('.newstabhomejcarousel-ctn').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items2').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel2', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn2').hide();
+    $('.newstabhomejcarousel-ctn2:first').show();
+    $('.newstabhomejcarousel-ctn2').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items4').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel4', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn4').hide();
+    $('.newstabhomejcarousel-ctn4:first').show();
+    $('.newstabhomejcarousel-ctn4').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items1').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel1', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn1').hide();
+    $('.newstabhomejcarousel-ctn1:first').show();
+    $('.newstabhomejcarousel-ctn1').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items3').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel3', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn3').hide();
+    $('.newstabhomejcarousel-ctn3:first').show();
+    $('.newstabhomejcarousel-ctn3').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type="text/javascript">
+$(function() {
+var timerset;
+$('.newstabhomejcarousel-items5').each(function(k, v) {
+    var jcarousel = $('.newstabhomejcarousel5', $(this));
+    var jcarouselcontrolnext = $('.mnav .next a', $(this));
+    var jcarouselcontrolprev = $('.mnav .prev a', $(this));
+    var jcarouselpagination = $('.jcarousel-pagination', $(this));
+
+    jcarousel.jcarousel({
+        wrap: 'circular',
+    }).jcarouselAutoscroll({
+        interval: 5000,
+        target: '+=1',
+        autostart: true
+    });
+
+    jcarouselcontrolprev
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .jcarouselControl({
+            target: '-=1'
+        });
+
+    jcarouselcontrolnext
+        .on('jcarouselcontrol:active', function() {
+            $(this).removeClass('inactive');
+        })
+        .on('jcarouselcontrol:inactive', function() {
+            $(this).addClass('inactive');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselControl({
+            target: '+=1'
+        });
+
+    jcarouselpagination
+        .on('jcarouselpagination:active', 'a', function() {
+            $(this).addClass('active');
+        })
+        .on('jcarouselpagination:inactive', 'a', function() {
+            $(this).removeClass('active');
+        })
+        .on('click', function(e) {
+            e.preventDefault();
+        })
+        .jcarouselPagination({
+            item: function(page) {
+                return '<a href="#' + page + '">' + page + '</a>';
+            }
+        });
+    setTimeout(function() {
+        var maxH = 0;
+        $('div.ct', jcarousel).each(function() {
+            if (maxH < $(this).height()) {
+                maxH = $(this).height();
+            }
+        });
+        $('div.ct', jcarousel).height(maxH);
+    }, 100);
+});
+setTimeout(function() {
+    $('.newstabhomejcarousel-ctn5').hide();
+    $('.newstabhomejcarousel-ctn5:first').show();
+    $('.newstabhomejcarousel-ctn5').css({
+        'position': 'relative'
+    });
+}, 150);
+});
+    </script>
+    <script type='text/javascript' src="~/Scripts/src/theme.js"></script>
+    <script type="text/javascript">
+$('.marquee').marquee();
+    </script>
+    <script type="text/javascript" src="~/Scripts/src/magicslideshow.js"></script>
+    <script type="text/javascript" src="~/Scripts/src/jwplayer.js"></script>
+    <script type="text/javascript">jwplayer.key="CKjOe06GxAOe3Dj9NaWPCQKtqvqQdyFV8z9wsg==";</script>
+    <script type="text/javascript">
+var blockInstance_nv8 = jwplayer("videoContBlock_nv8");
+blockInstance_nv8.setup({
+    image: "",
+    autostart: false,
+    aspectratio: "16:9",
+    controls: true,
+    displaydescription: true,
+    playlist: "https://stnmt.binhdinh.gov.vn/videos/player/57200-e0b49565dc8e913b809cd822641c9d5b-29109/",
+    displaytitle: true,
+    flashplayer: "/themes/default/modules/videos/jwplayer/jwplayer.flash.swf",
+    primary: "html5",
+    repeat: false,
+    mute: false,
+    skin: {"name": "stormtrooper"},
+    abouttext: "SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG BÌNH ĐỊNH",
+    aboutlink: "https://stnmt.binhdinh.gov.vn",
+    stagevideo: false,
+    stretching: "uniform",
+    visualplaylist: true,
+    width: "100%"
+  });
+    </script>
+    <script src="~/Scripts/src/boostrap.min.js"></script>
+    <script type="text/javascript">
+        function openCity(evt, cityName) {
+
+          // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent1");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
+
+        function openCity1(evt, cityName) {
+
+          // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen1").click();
+    </script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/src/custom.js"></script>
+    <script src="~/Scripts/src/global.js"></script>
+    <script src="~/Scripts/src/query-cokie.js"></script>
+    <script src="~/Scripts/src/custom.js"></script>
+    <script src="~/Scripts/src/global.js"></script>
+    <script src="~/Scripts/src/main.js"></script>
+    <script src="~/Scripts/src/new.js"></script>
+    <script src="~/Scripts/src/owl.carousel.min.js"></script>
+    <script src="~/Scripts/src/magicslideshow.js"></script>
+    <script src="~/Scripts/src/jwplayer.js"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.3"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Content/web/tether.min.js"></script>
+    <script src="~/Content/web/scripts.js"></script>
+    <script src="~/Content/photoswipe/init.js"></script>
+    <script src="~/Content/web/scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

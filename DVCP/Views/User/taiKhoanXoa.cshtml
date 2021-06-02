@@ -1,0 +1,133 @@
+﻿@model DVCP.Models.User1
+
+@{
+    ViewBag.Title = "taiKhoanXoa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    dd {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+</style>
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> XÓA THÔNG TIN</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+<h4><font color="red">Bạn đồng ý xóa không?</font></h4>
+<div>
+    <dl class="dl-horizontal">
+        <label>
+            @Html.DisplayNameFor(model => model.FullName):
+        </label>
+        <span>
+            @Html.DisplayFor(model => model.FullName)
+        </span>
+        <br />
+        <label>
+            @Html.DisplayNameFor(model => model.EmailID):
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.EmailID)
+        </span>
+        <br />
+
+        <label>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </span>
+        <br />
+
+        <label>
+            @Html.DisplayNameFor(model => model.UserPhone):
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.UserPhone)
+        </span>
+        <br />
+
+        <label>
+            @Html.DisplayNameFor(model => model.Confirmdate):
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.Confirmdate)
+        </span>
+        <br />
+
+        @*<label>
+            @Html.DisplayNameFor(model => model.ImagePath):
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.ImagePath)
+        </span>
+        <br />
+
+        <label>
+            @Html.DisplayNameFor(model => model.Avatar):
+        </label>
+
+        <span>
+            @Html.DisplayFor(model => model.Avatar)
+        </span>
+        <br />*@
+
+        <label>
+            @Html.DisplayNameFor(model => model.UserGender):
+        </label>
+
+        @{ if (Model.UserGender)
+            {
+                <span> Nam</span>
+            }
+            else
+            {
+                <span> Nữ</span>
+            }
+        }
+        <br />
+
+        <label>
+            Nhóm người dùng:
+        </label>
+
+        @{if (Model.GroupId == 1)
+            {
+                <span>Quản trị</span>
+            }
+            else if (Model.GroupId == 2)
+            {
+                <span>Nhập liệu</span>
+            }
+            else
+            {
+                <span> Tra cứu</span>
+            }
+        }
+
+        <hr />
+        <dt></dt>
+        <dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <a href="@Url.Action("quanLyTaiKhoan")" class="btn btn-info" style="border-radius: 0px;"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Quay lại</a> |
+                    <button type="submit" class="btn btn-danger" style="border-radius:0">
+                        <i class="fa fa-trash"></i>&emsp;Xóa&emsp;
+                    </button>
+                </div>
+            }
+        </dd>
+
+    </dl>
+</div>

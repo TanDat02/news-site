@@ -1,0 +1,291 @@
+﻿@model IEnumerable<DVCP.Models.User>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> QUẢN LÝ TÀI KHOẢN</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
+    <!--LỌC TÌM: PHẦN HIỆN-->
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group" style="margin-top:5px;">
+                <span class="input-group-addon" style="border:none;">Số dòng</span>
+                @Html.DropDownList("pagesize", new SelectList(new Dictionary<string, string> { { "10", "10" }, { "25", "25" }, { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1000", "1000" }, { "1000000", "Tất cả" } }, "Key", "Value"), new { @class = "form-control", @placeholder = "Số dòng tối đa trên một trang", @title = "Số dòng tối đa trên một trang", @id = "pagesizelist", @style = "min-width: 100%!important; border-radius: 0px;" })
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="input-group" style="margin-top:30px">
+                @Html.TextBox("searchstring", ViewBag.CurrentFilter as string, new { @class = "form-control", style = "width: 70%!important;", placeholder = "Nhập thông tin cần tìm", title = "Nhập thông tin cần tìm" })
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-flat" data-toggle="collapse" data-target="#LocTim" style="border-radius:0" placeholder="Tùy chọn mở rộng điều kiện lọc tìm" title="Tùy chọn mở rộng điều kiện lọc tìm">
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                    </button>
+                    <button type="submit" id="Find" name="Find" class="btn btn-info btn-flat" placeholder="Thực hiện lọc tìm dữ liệu" title="Thực hiện lọc tìm dữ liệu">Lọc tìm</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--LỌC TÌM: PHẦN ẨN-->
+
+}
+<br />
+
+
+<table class="table table-striped" style="width:100%; margin-top:-15px;">
+    <thead>
+        <tr style="font-family: Cambria, Georgia, serif;border-top:1pt solid grey;">
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().username)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th style="text-align: left; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.fullname)
+            </th>
+            <th style="text-align: center; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.userrole)
+            </th>
+            <th style="text-align: center; vertical-align: middle;">
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th class="visible-md visible-lg" style="text-align: center; vertical-align: middle; width:25px">
+                <button type="button" class="btn btn-success btn-sm" onclick="ThemInit()" style="border-radius: 0px;">
+                    <span class="glyphicon glyphicon-plus"></span><span> Thêm</span>
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>
+                <td style="text-align: left; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.fullname)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.userrole)
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td class="visible-md visible-lg" style="text-align: center; vertical-align: middle;">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 0px;">
+                            <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" style="text-align: left; border-radius: 0px;">
+                            <li style="cursor: pointer"><a onclick="XemRecord(@item.userid)"><span class="glyphicon glyphicon-eye-open"></span> Xem thông tin</a></li>
+                            <li style="cursor: pointer"><a onclick="SuaRecord(@item.userid)"><span class="glyphicon glyphicon-edit"></span> Sửa thông tin</a></li>
+                            <li style="cursor: pointer"><a onclick="XoaRecord(@item.userid)"><span class="glyphicon glyphicon-trash"></span> Xóa thông tin</a></li>
+                        </ul>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table border="0" style="width:100%; margin: 0px 0px 0px 0px;">
+    <tr>
+        <td style="text-align: left; width:135px">
+            Tổng mẫu tin @ViewBag.RowsCount
+        </td>
+        <td style="text-align: center;">
+        <td style="text-align: right; width:100px">
+        </td>
+    </tr>
+</table>
+
+<!--======================================================================-->
+<!--======================================================================-->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModal" aria-hidden="true" data-backdrop="static">
+    <div id="createContainer"></div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true" data-backdrop="static">
+    <div id="editContainer"></div>
+</div>
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="DetailsModal" aria-hidden="true" data-backdrop="static">
+    <div id="detailsContainer"></div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true" data-backdrop="static">
+    <div id="deleteContainer"></div>
+</div>
+
+
+<!--======================================================================-->
+<!--======================================================================-->
+<!--======================================================================-->
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        /*===================================================*/
+        /*===================================================*/
+        $('#pagesizelist').on('change', function (event) {
+            var form = $(event.target).parents('form');
+            form.submit();
+        });
+
+        /*===================================================*/
+        /*===================================================*/
+        function ThemInit() {
+            var url = '@Url.Action("Create","User")';
+            $.get(url, function (data) {
+                $('#createContainer').html(data);
+                $('#createModal').modal('show');
+                $('#idAddngayky').datepicker({
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                });
+            });
+        }
+        function ThemVali() {
+            var isValid = true;
+            if ($('#idAddthon').val().trim() == "") {
+                $('#idAddthon').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idAddthon').css('border-color', 'lightgrey');
+            }
+            if ($('#idAddngayky').val().trim() == "") {
+                $('#idAddngayky').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idAddngayky').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+        function ThemSave() {
+            var res = ThemVali();
+            if (res == false) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("Create", "User")',
+                type: 'POST',
+                data: $('#addFormId').serialize(),
+                success: function (response) {
+                    if (response.success == false)
+                        alert(response.message);
+                    $('#createModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function XemRecord(id) {
+            var url = '@Url.Action("Details", "User")';
+            $.get(url + '/' + id, function (data) {
+                $('#detailsContainer').html(data);
+                $('#detailsModal').modal('show');
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function SuaRecord(id) {
+            var url = '@Url.Action("Edit", "User")';
+            $.get(url + '/' + id, function (data) {
+                $('#editContainer').html(data);
+                $('#editModal').modal('show');
+                $('#idEditngayky').datepicker({
+                    dateFormat: "dd/mm/yy",
+                    autoclose: true
+                });
+            });
+        }
+        function SuaVali() {
+            var isValid = true;
+            if ($('#idEditthon').val().trim() == "") {
+                $('#idEditthon').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idEditthon').css('border-color', 'lightgrey');
+            }
+            if ($('#idEditngayky').val().trim() == "") {
+                $('#idEditngayky').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#idEditngayky').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+        function SuaSave() {
+            var res = SuaVali();
+            if (res == false) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("Edit", "User")',
+                type: 'POST',
+                data: $('#editFormId').serialize(),
+                success: function (response) {
+                    if (response.success == false)
+                        alert(response.message);
+                    $('#createModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+
+        /*===================================================*/
+        /*===================================================*/
+        function XoaRecord(id) {
+            var url = '@Url.Action("Delete", "SoMucKe")';
+            $.get(url + '/' + id, function (data) {
+                $('#deleteContainer').html(data);
+                $('#deleteModal').modal('show');
+            });
+        }
+        function XoaSave(id) {
+            $.ajax({
+                url: '@Url.Action("Delete", "User")/' + id,
+                type: 'POST',
+                data: $('#delFormId').serialize(),
+                success: function (response) {
+                    $('#deleteModal').modal('hide');
+                    window.location.reload();
+                },
+                error: function (response) {
+                    alert(response.message);
+                }
+            });
+        }
+    </script>
+}
+

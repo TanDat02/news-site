@@ -1,0 +1,108 @@
+﻿@model DVCP.Models.Tinh
+
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.slimscroll.min.js"></script>
+
+<style>
+    dt {
+        font-weight: normal;
+        color: gray;
+    }
+
+    dd {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div style="margin-top:60px; text-align: center">
+    <h4><span style="color:blue"> CHI TIẾT TỈNH</span></h4>
+    <p style="margin-top:3px; border-bottom: 1px dotted blue;"></p>
+</div>
+
+
+<div class="modal-dialog" style="width: 650px;">
+    <div class="modal-content" style="border-radius: 0px;">
+        <div class="modal-header" style="background:#00c0ef;color:white;">
+
+            <h5 class="modal-title"><i class="fa fa-info-circle"></i><span>  Chi tiết</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <div class="modal-body" style="font-size:13px;">
+            <div id="scroll-detail">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.maTinh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.maTinh)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tenTinh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.tenTinh)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.phanLoai)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.phanLoai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.thuTuSapXep)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.thuTuSapXep)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.danSo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.danSo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.dienTich)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.dienTich)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ngayChinhSua)
+                    </dt>
+                    <dd>
+                        @Html.Raw(@String.Format("{0:dd/MM/yyyy}", Model.ngayChinhSua))
+                    </dd>
+
+                </dl>
+
+            </div> <!-- end scroll-detail -->
+        </div> <!-- end modal-body -->
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;border-radius: 4px;border: 1px solid #ccc"><i class="fa fa-close"></i> Thoát</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#scroll-detail').slimScroll({
+            height: '200px',
+            allowPageScroll: true,
+            alwaysVisible: true,
+            railVisible: true,
+            railColor: '#222',
+            railOpacity: 0.3,
+            wheelStep: 10
+        });
+    });
+</script>
+

@@ -1,0 +1,78 @@
+﻿
+@model DVCP.Models.User
+
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-dialog" style="width: 650px;">
+    <div class="modal-content" style="border-radius:0px;">
+        <div class="modal-header" style="background:#00a65a;color:white;">
+            <h5 class="modal-title"><i class="fa fa-plus"></i><span> Thêm</span></h5>
+        </div>
+        <div class="modal-body" style="font-size:13px;">
+            @using (Ajax.BeginForm("Create", "User", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "addFormId", role = "form" }))
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.username, "Tên tài khoản", htmlAttributes: new { @class = "control-label col-md-3", style = "mwidth: 100 %" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Tên tài khoản", @title = "Tên thôn", autocomplete = "off", @id = "idAddthon" } })
+                            @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-3", style = "mwidth: 100 %" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Mật khẩu", @title = "Tên thôn", autocomplete = "off", @id = "idAddthon" } })
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fullname, htmlAttributes: new { @class = "control-label col-md-3", style = "mwidth: 100 %" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @class = "form-control", style = "min - width: 100 % !important; ", @placeholder = "Họ và tên", @title = "Nội dung", autocomplete = "off", @id = "idAddnoidung" } })
+                            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.userrole, htmlAttributes: new { @class = "control-label col-md-3", style = "mwidth: 100 %" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.userrole, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%!important;", @placeholder = "Chức vụ", @title = "Quyển", autocomplete = "off", @id = "idAddquyen" } })
+                            @Html.ValidationMessageFor(model => model.userrole, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-3", style = "mwidth: 100 %" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.status, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%!important;", @placeholder = "Trạng thái", @title = "Quyển", autocomplete = "off", @id = "idAddquyen" } })
+                            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btnAdd" onclick="return ThemSave();" style="width:80px;border-radius: 0px;"><i class="fa fa-save"></i> Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;border-radius: 0px;"><i class="fa fa-close"></i> Thoát</button>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
